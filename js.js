@@ -39,35 +39,21 @@ numbers.forEach((i) => {
   });
 });
 
+let calculo = 0;
+
 let calculos = {
-  soma: simbols.botaoSomar.addEventListener(
-    "click",
-    function somar(numbersClicked) {
-      resultado.insertAdjacentText("beforeend", "+");
-      return (calculo = numbersClicked[0] + numbersClicked[1]);
-    }
-  ),
-  subtracao: simbols.botaoSubtrair.addEventListener(
-    "click",
-    function subtrair(numbersClicked) {
-      resultado.insertAdjacentText("beforeend", "-");
-      return (calculo = numbersClicked[0] - numbersClicked[1]);
-    }
-  ),
-  divisao: simbols.botaoDividir.addEventListener(
-    "click",
-    function dividir(numbersClicked) {
-      resultado.insertAdjacentText("beforeend", "/");
-      return (calculo = numbersClicked[0] / numbersClicked[1]);
-    }
-  ),
-  multipli: simbols.botaoMultiplicar.addEventListener(
-    "click",
-    function multiplicar(numbersClicked) {
-      resultado.insertAdjacentText("beforeend", "*");
-      return (calculo = numbersClicked[0] * numbersClicked[1]);
-    }
-  ),
+  soma: simbols.botaoSomar.addEventListener("click", () => {
+    resultado.insertAdjacentText("beforeend", "+");
+  }),
+  subtracao: simbols.botaoSubtrair.addEventListener("click", () => {
+    resultado.insertAdjacentText("beforeend", "-");
+  }),
+  divisao: simbols.botaoDividir.addEventListener("click", () => {
+    resultado.insertAdjacentText("beforeend", "/");
+  }),
+  multipli: simbols.botaoMultiplicar.addEventListener("click", () => {
+    resultado.insertAdjacentText("beforeend", "*");
+  }),
   elevarQuadrado: simbols.botaoElevarQuadrado.addEventListener("click", () => {
     resultado.insertAdjacentText("beforeend", "^");
   }),
@@ -78,12 +64,16 @@ let calculos = {
     resultado.insertAdjacentText("beforeend", "√");
   }),
   igual: simbols.sinalIgual.addEventListener("click", () => {
-    resultado.insertAdjacentText("beforeend", " = ");
-    if (resultado == calculos.soma) {
-      console.log(true);
-    } else console.log(false);
+    if (resultado.innerHTML === simbols.botaoSomar.textContent) {
+      console.log("tem o sinal de somar");
+      calculo = numbersClicked.reduce((acumulador, valorAtual) => {
+        return acumulador + valorAtual;
+      })
+      resultado.insertAdjacentText("beforeend", calculo);
+    }
+    resultado.insertAdjacentText("beforeend", ` = ${calculo}`);
   }),
   limpar: simbols.botaoLimpar.addEventListener("click", () => {
-    resultado.innerHTML = "0"
+    resultado.innerHTML = "0";
   }),
 };
