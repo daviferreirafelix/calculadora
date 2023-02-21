@@ -48,8 +48,8 @@ body {
   background-color: rgb(51, 50, 50);
 }
 
-.sinalIgual {
-  min-width: 130px;
+.sinalIgual, .botaoLimpar {
+  min-width: 133px;
   background-color: cornsilk;
 }
 
