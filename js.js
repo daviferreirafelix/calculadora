@@ -1,23 +1,23 @@
 let resultado = document.querySelector(".resultado");
+let botaoSomar = document.querySelector(".botaoSomar");
+let botaoSubtrair = document.querySelector(".botaoSubtrair");
+let botaoDividir = document.querySelector(".botaoDividir");
+let botaoMultiplicar = document.querySelector(".botaoMultiplicar");
+let botaoElevarQuadrado = document.querySelector(".botaoElevarQuadrado");
+let botaoRaiz = document.querySelector(".botaoRaiz");
+let simboloParenteseEsquerdo = document.querySelector(
+  ".simboloParenteEsquerdo"
+);
+let simboloParenteseDireito = document.querySelector(
+  ".simboloParenteseDireito"
+);
+let sinalIgual = document.querySelector(".sinalIgual");
+let botaoPorcentagem = document.querySelector(".botaoPorcentagem");
+let botaoVirgula = document.querySelector(".botaoVirgula");
+let botaoRefazer = document.querySelector(".botaoRefazer");
+let botaoLimpar = document.querySelector(".botaoLimpar");
 
-let simbols = {
-  botaoSomar: document.querySelector(".botaoSomar"),
-  botaoSubtrair: document.querySelector(".botaoSubtrair"),
-  botaoDividir: document.querySelector(".botaoDividir"),
-  botaoMultiplicar: document.querySelector(".botaoMultiplicar"),
-  botaoElevarQuadrado: document.querySelector(".botaoElevarQuadrado"),
-  botaoRaiz: document.querySelector(".botaoRaiz"),
-  parenteseEsquerdo: document.querySelector(".simboloParenteEsquerdo"),
-  parenteseDireito: document.querySelector(".simboloParenteseDireito"),
-  sinalIgual: document.querySelector(".sinalIgual"),
-  botaoPorcentagem: document.querySelector(".botaoPorcentagem"),
-  botaoVirgula: document.querySelector(".botaoVirgula"),
-  botaoRefazer: document.querySelector(".botaoRefazer"),
-  botaoLimpar: document.querySelector(".botaoLimpar"),
-};
-
-let numbers = [
-  document.querySelector("#n0"),
+const numbers = [
   document.querySelector("#n1"),
   document.querySelector("#n2"),
   document.querySelector("#n3"),
@@ -32,65 +32,77 @@ let numbers = [
 let numbersClicked = [];
 let novoArray = [];
 let calculo = 0;
+let limparArray = () => {
+  novoArray.push(Number(numbersClicked.join("")));
+  while (numbersClicked.length) numbersClicked.pop();
+  console.log(novoArray);
+}
 
-numbers.forEach((numbersClickedValue) => {
-  numbersClickedValue.addEventListener("click", () => {
-    numbersClicked.push(numbersClickedValue.value);
+numbers.forEach((numbersValue) => {
+  numbersValue.addEventListener("click", () => {
+    if (resultado.textContent.includes(0)) resultado.textContent = ""
+    numbersClicked.push(Number(numbersValue.textContent));
+    resultado.insertAdjacentText("beforeend", numbersValue.textContent);
     console.log(numbersClicked);
-    resultado.textContent == 0
-      ? (resultado.textContent = numbersClicked[0])
-      : resultado.insertAdjacentText("beforeend", numbersClickedValue.value);  
-    });
+  });
 });
 
-simbols.botaoSomar.addEventListener("click", () => {
+botaoSomar.addEventListener("click", () => {
   resultado.insertAdjacentText("beforeend", " + ");
-  console.log(Number(numbersClicked.join("")));
-  for (let numbersNovoArray in novoArray.length){
-    numbersNovoArray.add
-  } 
+  limparArray()
 });
-simbols.botaoSubtrair.addEventListener("click", () => {
-  resultado.insertAdjacentText("beforeend", "-");
+botaoSubtrair.addEventListener("click", () => {
+  resultado.insertAdjacentText("beforeend", " - ");
+  limparArray()
 });
-simbols.botaoDividir.addEventListener("click", () => {
-  resultado.insertAdjacentText("beforeend", "/");
+botaoDividir.addEventListener("click", () => {
+  resultado.insertAdjacentText("beforeend", " / ");
+  limparArray()
 });
-simbols.botaoMultiplicar.addEventListener("click", () => {
-  resultado.insertAdjacentText("beforeend", "*");
+botaoMultiplicar.addEventListener("click", () => {
+  resultado.insertAdjacentText("beforeend", " * ");
+  limparArray()
 });
-simbols.botaoElevarQuadrado.addEventListener("click", () => {
-  resultado.insertAdjacentText("beforeend", "^");
+botaoElevarQuadrado.addEventListener("click", () => {
+  resultado.insertAdjacentText("beforeend", " ^ ");
+  limparArray()
 });
-simbols.botaoPorcentagem.addEventListener("click", () => {
-  resultado.insertAdjacentText("beforeend", "%");
+botaoPorcentagem.addEventListener("click", () => {
+  resultado.insertAdjacentText("beforeend", " % ");
+  limparArray()
 });
-simbols.botaoRaiz.addEventListener("click", () => {
+botaoRaiz.addEventListener("click", () => {
   resultado.insertAdjacentText("beforeend", "√");
+  limparArray()
 });
-simbols.botaoVirgula.addEventListener("click", () => {
+botaoVirgula.addEventListener("click", () => {
   resultado.insertAdjacentText("beforeend", simbols.botaoVirgula.textContent);
   numbersClicked.push(simbols.botaoVirgula.textContent);
 });
-simbols.sinalIgual.addEventListener("click", () => {
-  if (resultado.textContent !== simbols.botaoSomar.textContent) {
-    console.log("tem o sinal de somar");
-    calculo = numbersClicked + novoArray;
-  } else if (resultado.innerHTML === simbols.botaoSubtrair.textContent) {
-    console.log("Tem o sinal de subtrair");
-    calculo = numbersClicked.reduce((acumulador, valorAtual) => acumulador - valorAtual);
-  } else if (resultado.innerHTML === simbols.botaoDividir.textContent) {
+sinalIgual.addEventListener("click", () => {
+  if (resultado.textContent.includes(botaoSomar.textContent)) {
+    novoArray.push(Number(numbersClicked.join("")));
+    novoArray.forEach((elemento) => (calculo += elemento));
+  } else if (resultado.textContent.includes(botaoSubtrair.textContent)) {
+    novoArray.push(Number(numbersClicked.join("")));
+    novoArray.forEach((elemento) => (calculo -= elemento));
+  } else if (resultado.textContent.includes(botaoDividir.textContent)) {
     console.log("Tem o sinal de dividir");
-    calculo = numbersClicked.reduce((acumulador, valorAtual) => acumulador / valorAtual);
-  } else if (resultado.innerHTML === simbols.botaoMultiplicar.textContent) {
+    novoArray.push(Number(numbersClicked.join("")));
+    novoArray.forEach((elemento) => (calculo /= elemento));
+  } else if (resultado.textContent.includes(botaoMultiplicar.textContent)) {
     console.log("Tem o botão de multiplicar");
-    calculo = numbersClicked((acumulador, valorAtual) => acumulador * valorAtual);
-  }
+    novoArray.push(Number(numbersClicked.join("")));
+    novoArray.forEach((elemento) => (calculo *= elemento));
+  } else console.log("Erro");
+
   resultado.insertAdjacentText("beforeend", ` = ${calculo}`);
 });
 
 //RESOLVIDO
-simbols.botaoLimpar.addEventListener("click", () => {
+botaoLimpar.addEventListener("click", () => {
   resultado.textContent = "0";
   while (numbersClicked.length) numbersClicked.pop();
+  while (novoArray.length) novoArray.pop();
+  calculo = 0;
 });
