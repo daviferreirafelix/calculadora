@@ -17,6 +17,7 @@ const botaoVirgula = document.querySelector(".botaoVirgula");
 const botaoLimpar = document.querySelector(".botaoLimpar");
 
 const numbers = [
+  document.querySelector("#n0"),
   document.querySelector("#n1"),
   document.querySelector("#n2"),
   document.querySelector("#n3"),
@@ -31,11 +32,7 @@ const numbers = [
 const numbersClicked = [];
 const novoArray = [];
 let calculo = 0;
-const limparArray = () => {
-  novoArray.push(Number(numbersClicked.join("")));
-  while (numbersClicked.length) numbersClicked.pop();
-  console.log(novoArray);
-};
+let resultadoFinal = 0;
 
 numbers.forEach((numbersValue) => {
   numbersValue.addEventListener("click", () => {
@@ -45,6 +42,12 @@ numbers.forEach((numbersValue) => {
     console.log(numbersClicked);
   });
 });
+
+const limparArray = () => {
+  novoArray.push(Number(numbersClicked.join("")));
+  while (numbersClicked.length) numbersClicked.pop();
+  console.log(novoArray);
+};
 
 botaoSomar.addEventListener("click", () => {
   resultado.insertAdjacentText("beforeend", " + ");
@@ -75,20 +78,22 @@ botaoRaiz.addEventListener("click", () => {
   limparArray();
 });
 botaoVirgula.addEventListener("click", () => {
-  resultado.insertAdjacentText("beforeend", simbols.botaoVirgula.textContent);
-  numbersClicked.push(simbols.botaoVirgula.textContent);
+  resultado.insertAdjacentText("beforeend", botaoVirgula.textContent);
+  numbersClicked.push(botaoVirgula.textContent);
 });
 sinalIgual.addEventListener("click", () => {
   if (resultado.textContent.includes(botaoSomar.textContent)) {
     novoArray.push(Number(numbersClicked.join("")));
     novoArray.forEach((elemento) => (calculo += elemento));
   } else if (resultado.textContent.includes(botaoSubtrair.textContent)) {
-    novoArray.push(Number(numbersClicked.join("")));
-    novoArray.forEach((elemento) => (calculo -= elemento));
+    novoValor = Number(numbersClicked.join(""));
+    novoArray.forEach((elemento) => (primeiroValor = elemento));
+    calculo = primeiroValor - novoValor;
   } else if (resultado.textContent.includes(botaoDividir.textContent)) {
     console.log("Tem o sinal de dividir");
-    novoArray.push(Number(numbersClicked.join("")));
-    novoArray.forEach((elemento) => (calculo /= elemento));
+    novoValor = Number(numbersClicked.join(""));
+    novoArray.forEach(elemento => primeiroValor = elemento);
+    calculo = primeiroValor / novoValor;
   } else if (resultado.textContent.includes(botaoMultiplicar.textContent)) {
     console.log("Tem o botão de multiplicar");
     novoArray.push(Number(numbersClicked.join("")));
@@ -98,7 +103,6 @@ sinalIgual.addEventListener("click", () => {
   resultado.insertAdjacentText("beforeend", ` = ${calculo}`);
 });
 
-//  RESOLVIDO
 botaoLimpar.addEventListener("click", () => {
   resultado.textContent = "0";
   while (numbersClicked.length) numbersClicked.pop();
