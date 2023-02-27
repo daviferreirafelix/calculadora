@@ -20,7 +20,7 @@ body {
 }
 
 .corpo {
-  min-width: 31vw;
+  width: 31vw;
   display: flex;
   margin-top: 50px;
   flex-direction: column;
@@ -30,7 +30,7 @@ body {
   padding: 0 5px;
 }
 
-.resultado {
+#resultado {
   text-align: end;
   font-size: 2em;
   height: 150px;
@@ -48,7 +48,7 @@ body {
   background-color: rgb(51, 50, 50);
 }
 
-.sinalIgual, .botaoLimpar {
+#sinalIgual, #botaoLimpar {
   min-width: 133px;
   background-color: cornsilk;
 }
