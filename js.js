@@ -36,18 +36,17 @@ let calculo = 0;
 
 numbers.forEach((numbersValue) => {
   numbersValue.addEventListener("click", () => {
-    if (resultado.textContent.includes(0)) resultado.textContent = "";
     numbersClicked = Number(numbersValue.textContent);
     resultado.insertAdjacentText("beforeend", numbersValue.textContent);
     console.log(numbersClicked);
   });
 });
 
-const realocarValor = () => {
+function realocarValor() {
   newNumberClicked = Number(numbersClicked);
   numbersClicked = 0;
   console.log(newNumberClicked);
-};
+}
 
 function conditions() {
   if (resultado.textContent.includes(simbols.botaoSomar.textContent)) {
@@ -111,8 +110,11 @@ const operations = [
     realocarValor();
   }),
   simbols.botaoVirgula.addEventListener("click", () => {
-    resultado.insertAdjacentText("beforeend", simbols.botaoVirgula.textContent);
-    numbersClicked = simbols.botaoVirgula.textContent;
+    if (resultado.textContent.includes(".")) return;
+    else {
+      resultado.insertAdjacentText("beforeend", simbols.botaoVirgula.textContent);
+      numbersClicked = simbols.botaoVirgula.textContent;
+    }
   }),
   simbols.sinalIgual.addEventListener("click", () => {
     conditions();
@@ -120,7 +122,7 @@ const operations = [
   }),
   simbols.botaoLimpar.addEventListener("click", () => {
     console.clear();
-    resultado.textContent = "0";
+    resultado.textContent = ""
     numbersClicked = 0;
     newNumberClicked = 0;
     calculo = 0;
